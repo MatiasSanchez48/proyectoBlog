@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 
+import { Link } from "react-router-dom";
+
 import "./blog.css";
 const Blog = ({ blog }) => {
   console.log(blog);
@@ -14,6 +16,7 @@ const Blog = ({ blog }) => {
           <p>{blog.publishedAt}</p>
         </div>
         <p className="descripcion">{blog.description}</p>
+        <Link to={`/blog/${blog.source.name}`}>Ver más</Link>
       </div>
     </div>
   );
