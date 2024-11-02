@@ -1,0 +1,26 @@
+html,
+body #root {
+  height: 100%;
+  width: 100%;
+}
+
+.appbar {
+  display: flex;
+  background-color: #212121;
+  padding: 20px;
+  border-radius: 10px;
+  width: 100%;
+}
+.right {
+  display: flex;
+  margin-left: auto;
+}
+.link {
+  color: white;
+  text-decoration: none;
+  margin-left: 20px;
+}
+.link:hover {
+  text-decoration: underline;
+  color: #ffbb00;
+}

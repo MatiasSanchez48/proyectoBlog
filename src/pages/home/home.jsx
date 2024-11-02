@@ -6,7 +6,7 @@ const Home = () => {
 
   const fetchBlogs = async () => {
     const response = await fetch(
-      "https://newsapi.org/v2/everything?q=tesla&from=2024-09-24&sortBy=publishedAt&apiKey=84a09e563c9c44998149f8e57bcbeb93"
+      "https://newsapi.org/v2/everything?q=tesla&from=2024-10-02&sortBy=publishedAt&apiKey=84a09e563c9c44998149f8e57bcbeb93"
     );
     const data = await response.json();
     setBlogs(data.articles);
