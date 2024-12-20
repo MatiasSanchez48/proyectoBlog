@@ -1,9 +1,18 @@
+import { useContext } from "react";
+import { AuthContext } from "../../context/auth_context";
+
 const Footer = () => {
-    return (
+  const { isLogger } = useContext(AuthContext);
+
+  return (
+    <>
+      {isLogger ? null : (
         <footer>
-            <h1>Footer</h1>
+          <h1>Footer</h1>
         </footer>
-    );
+      )}
+    </>
+  );
 };
 
 export default Footer;

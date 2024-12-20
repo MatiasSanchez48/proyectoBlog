@@ -1,0 +1,33 @@
+.autor {
+  display: flex;
+  align-items: center;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffbb0067;
+  margin-right: 10px;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.initials {
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+}
+
+.autor-info p {
+  margin: 0;
+  padding: 0;
+}

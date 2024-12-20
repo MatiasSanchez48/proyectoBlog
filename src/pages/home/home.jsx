@@ -5,22 +5,38 @@ const Home = () => {
   const [blogs, setBlogs] = useState([]);
 
   const fetchBlogs = async () => {
-    const response = await fetch(
-      "https://newsapi.org/v2/everything?q=tesla&from=2024-10-02&sortBy=publishedAt&apiKey=84a09e563c9c44998149f8e57bcbeb93"
-    );
-    const data = await response.json();
-    setBlogs(data.articles);
+    try {
+      const backURL = import.meta.env.VITE_URL + "blog/";
+      const response = await fetch(backURL);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const responseJson = await response.json();
+
+      setBlogs(responseJson.data.blogs);
+    } catch (error) {
+      console.error("Fetch error: ", error);
+    }
   };
 
   useEffect(() => {
     fetchBlogs();
   }, []);
 
+  if (blogs.length === 0) {
+    return (
+      <>
+        <h1>Home</h1>
+        <h3>No hay blogs...</h3>
+      </>
+    );
+  }
   return (
     <>
       <h1>Home</h1>
       {blogs.map((blog) => (
-        <Blog key={blog.source.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} />
       ))}
     </>
   );
