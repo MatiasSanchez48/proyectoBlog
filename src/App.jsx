@@ -1,13 +1,12 @@
 import "./App.css";
 import Home from "./pages/home/home";
-// import DetalleBlog from "./pages/home/detalle_blog";
+import DetalleBlog from "./pages/home/detalle_blog";
 import Appbar from "./conponents/appbar/appbar";
 import Footer from "./conponents/footer/footer";
 import Login from "./pages/login/login";
 import Register from "./pages/register/register";
 import Productos from "./pages/productos/productos";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import { useState, useEffect } from "react";
 import { AuthProvider } from "./context/auth_context";
 import CrearBlog from "./pages/crear-blog/CrearBlog";
 //! PARA usar als variables de entorno.
@@ -24,26 +23,13 @@ function App() {
 }
 
 function AppContent() {
-  // const [blogs, setBlogs] = useState([]);
-
-  // const fetchBlogs = async () => {
-    // const backURL = import.meta.env.VITE_URL;
-    // const response = await fetch(backURL + "/productos");
-    // const data = await response.json();
-    // setBlogs(data.articles);
-  // };
-
-  // useEffect(() => {
-  //   fetchBlogs();
-  // }, []);
-
   return (
     <div className="app-container">
       <Appbar />
       <main>
         <Routes>
           <Route path="/" element={<Home />} />
-          {/* <Route path="/blog/:name" element={<DetalleBlog blogs={blogs} />} /> */}
+          <Route path="/blog/:id" element={<DetalleBlog />} />
           <Route path="/productos" element={<Productos />} />
           <Route path="/crear-blog" element={<CrearBlog />} />
           {/*//! TODO: falta hacer la route de contacto */}

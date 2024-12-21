@@ -1,39 +1,68 @@
-// import { useParams, Link } from "react-router-dom";
-// import { useState, useEffect } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useParams, Link } from "react-router-dom";
+import { useState, useEffect } from "react";
+import "./detalle_blog.css";
+import CircularProgress from "@mui/material/CircularProgress";
+
+import Autor from "./autor";
 
 const DetalleBlog = () => {
-  // const { name } = useParams(); // Obtiene el parámetro name de la URL
-  // const [blog, setBlog] = useState();
+  const { id } = useParams();
+  const [blog, setBlog] = useState();
+  const [isLoading, setIsLoading] = useState(true);
 
-  // useEffect(() => {
-  //   // Función asincrónica interna para hacer la llamada de la API
-  //   const fetchBlog = async () => {
-  //     const response = await fetch(
-  //       "https://newsapi.org/v2/everything?q=tesla&from=2024-09-24&sortBy=publishedAt&apiKey=84a09e563c9c44998149f8e57bcbeb93"
-  //     );
-  //     const data = await response.json();
+  const fetchBlog = async () => {
+    setIsLoading(true);
+    const backURL = import.meta.env.VITE_URL;
+    const response = await fetch(backURL + "blog/" + id);
 
-  //     // Busca el blog que coincida con el parámetro 'name' (en este caso, el 'source.name')
-  //     const foundBlog = data.articles.find((b) => b.source.name === name);
-  //     setBlog(foundBlog);
-  //   };
+    const resonseJson = await response.json();
+    const blogData = resonseJson.data.blog;
 
-  //   fetchBlog(); // Llama a la función interna
-  // }, [name]); // 'name' como dependencia para ejecutar el efecto cada vez que cambie
-
-  // if (!blog) {
-  //   return <div>Blog no encontrado</div>;
-  // }
+    setBlog(blogData);
+    setIsLoading(false);
+  };
+  useEffect(() => {
+    fetchBlog();
+  }, []);
+  if (isLoading) {
+    return (
+      <div className="blog-detail loading">
+        <div className="spinner-container">
+          <CircularProgress style={{ color: "#ffbb0067" }} />
+        </div>
+      </div>
+    );
+  }
+  if (!blog) {
+    return <div>Blog no encontrado</div>;
+  }
+  const isAuthor = blog.autor.id === 1;
 
   return (
-    <div>
-      {/* <h1>{blog.title}</h1>
-      <img src={blog.urlToImage} alt={blog.title} />
-      <p>{blog.author}</p>
-      <p>{blog.publishedAt}</p>
-      <p>{blog.content}</p>
-
-      <Link to={`/`}>Volver</Link> */}
+    <div className="blog-detail">
+      <h1 className="blog-title">{blog.titulo}</h1>
+      <img
+        src={blog.imagen || "/default-image.jpg"}
+        alt={blog.titulo}
+        className="blog-image"
+      />
+      <hr className="divider" />
+      <p className="blog-description">Descripcion: {blog.descripcion}</p>
+      <p className="blog-content">Contenido: {blog.contenido}</p>
+      <div className="blog-meta">
+        {<Autor autor={blog.autor} /> || "Autor desconocido"}
+        {isAuthor && (
+          <p className="highlight">¡Eres el autor de este blog! 🎉</p>
+        )}
+        <p>
+          <strong>Fecha de publicación:</strong>{" "}
+          {new Date(blog.fechaPublicacion).toLocaleDateString()}
+        </p>
+      </div>
+      <Link className="back-link" to={`/`}>
+        Volver
+      </Link>
     </div>
   );
 };

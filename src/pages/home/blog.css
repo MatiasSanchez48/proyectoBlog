@@ -9,7 +9,7 @@
   padding-bottom: 30px;
   margin: 20px;
   border-radius: 20px;
-  cursor: pointer;
+
   border: 1.5px solid #ffbb0067;
 }
 .datos {
@@ -29,9 +29,9 @@
 }
 .divider {
   border: none;
-  border-top: 1.5px solid #ffbb0067; /* Líneas divisorias */
+  border-top: 1.5px solid #ffbb0067;
   width: 90%;
-  margin: 5px 5px; /* Espaciado encima y debajo de la línea */
+  margin: 5px 5px;
 }
 .titulo-descripcion {
   margin: 0;
@@ -67,7 +67,7 @@
   margin: 0;
 }
 .imagen {
-  width: 300px;
+  width: 450px;
   height: 300px;
   border-radius: 20px;
   object-fit: cover;
@@ -85,6 +85,10 @@
   font-weight: bold;
 }
 
+.vermas {
+  margin: 0;
+  align-self: flex-end;
+}
 h1:hover {
   color: #ffbb00;
 }

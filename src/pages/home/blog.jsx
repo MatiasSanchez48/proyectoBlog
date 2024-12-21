@@ -23,12 +23,12 @@ const Blog = ({ blog }) => {
         <div className="autor-vermas">
           <div>
             <p className="titulo-descripcion">Creador:</p>{" "}
-            <p className="autor">{<Autor autor={blog.autor}/> || "Autor desconocido"}</p>
+            <div className="autor">{<Autor autor={blog.autor}/> || "Autor desconocido"}</div>
           </div>
-          <Link to={`/blog/${blog.id}`}>Ver más</Link>
+          <Link className="vermas" to={`/blog/${blog.id}`}>Ver más</Link>
         </div>
       </div>
-      <img src={blog.imagen} alt={blog.titulo} className="imagen" />
+      <img src={blog.imagen} alt={null} className="imagen" />
     </div>
   );
 };

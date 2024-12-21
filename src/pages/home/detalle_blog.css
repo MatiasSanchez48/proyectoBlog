@@ -1,0 +1,116 @@
+.blog-detail {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #212121;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-family: Arial, sans-serif;
+  border: 1.5px solid #ffbb0067;
+}
+
+.blog-title {
+  font-size: 2.5rem;
+  color: white;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: capitalize;
+}
+
+.blog-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.blog-description {
+  text-align: start;
+  text-transform: capitalize;
+  font-size: 1.2rem;
+  color: white;
+  margin: 10px;
+  padding-left: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-align: left;
+}
+
+.blog-content {
+  padding-left: 5px;
+  text-align: start;
+  margin: 10px;
+  text-transform: capitalize;
+  font-size: 1rem;
+  line-height: 1.6;
+  color: white;
+  margin-bottom: 20px;
+  font-size: 16px;
+  font-weight: 600;
+  display: flex;
+  white-space: normal;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  text-align: left;
+}
+
+.blog-meta {
+  padding-left: 10px;
+  font-size: 0.9rem;
+  color: white;
+  margin-bottom: 20px;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 98%;
+  margin-top: 20px;
+}
+
+.blog-meta strong {
+  color: white;
+}
+
+.highlight {
+  color: #ffa500;
+  padding: 5px 10px;
+  border-radius: 5px;
+  margin: 10px 0;
+  display: inline-block;
+}
+
+.back-link {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #ffbb0067;
+  color: white;
+  text-decoration: none;
+  border-radius: 4px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+
+.back-link:hover {
+  background: #ffa500;
+  color: black;
+  box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+}
+.divider {
+  border: none;
+  border-top: 1.5px solid #ffbb0067;
+  width: 100%;
+  margin: 5px 5px;
+}
