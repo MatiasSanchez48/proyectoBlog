@@ -12,7 +12,8 @@ const Login = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const handleLoginBack = async (data) => {
-    const response = await fetch(import.meta.env.VITE_URL + "auth/login", {
+    const backURL = import.meta.env.VITE_URL;
+    const response = await fetch(backURL + "auth/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -45,7 +46,7 @@ const Login = () => {
       } else {
         setAccessToken(responseJson.data.accessToken);
         setRefreshToken(responseJson.data.refreshToken);
-        login();
+        login(responseJson.data.usuario.id);
         toast.success("Login exitoso");
         //navegar al login
         setIsLoading(false);
@@ -68,7 +69,7 @@ const Login = () => {
             type="text"
             value={username}
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username"
+            placeholder="Username or Email"
             required
           />
         </div>

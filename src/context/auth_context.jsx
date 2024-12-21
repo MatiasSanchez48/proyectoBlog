@@ -5,16 +5,19 @@ import React, { createContext, useState, useEffect } from "react";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
+  const [userId, setUserId] = useState(localStorage.getItem("userId"));
   const [isLogger, setIsLogger] = useState(() => {
     const store = localStorage.getItem("isLogged");
     return store === "true";
   });
+
   const [accessToken, setAccessToken] = useState(
     localStorage.getItem("accessToken")
   );
   const [refreshToken, setRefreshToken] = useState(
     localStorage.getItem("refreshToken")
   );
+
   useEffect(() => {
     if (accessToken) {
       localStorage.setItem("accessToken", accessToken);
@@ -29,6 +32,7 @@ const AuthProvider = ({ children }) => {
       localStorage.removeItem("refreshToken");
     }
   }, [refreshToken]);
+
   const handleRefreshToken = async () => {
     const backURL = import.meta.env.VITE_URL;
     const response = await fetch(backURL + "auth/token", {
@@ -51,14 +55,27 @@ const AuthProvider = ({ children }) => {
 
   useEffect(() => {
     localStorage.setItem("isLogged", isLogger);
-  }, [isLogger]);
-  const login = () => {
+
+    localStorage.setItem("userId", userId);
+  }, [isLogger, userId]);
+
+  const login = (id) => {
+    setUserId(id);
     setIsLogger(true);
     localStorage.setItem("isLogged", true);
+    localStorage.setItem("userId", id);
+    console.log(localStorage.getItem("userId"));
+    console.log(localStorage.getItem("isLogged"));
   };
   const logout = () => {
     setIsLogger(false);
+    setUserId(null);
+    setAccessToken(null);
+    setRefreshToken(null);
     localStorage.removeItem("isLogged");
+    localStorage.removeItem("userId");
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
   };
   return (
     <AuthContext.Provider
@@ -71,6 +88,7 @@ const AuthProvider = ({ children }) => {
         accessToken,
         setAccessToken,
         setRefreshToken,
+        userId,
       }}
     >
       {children}

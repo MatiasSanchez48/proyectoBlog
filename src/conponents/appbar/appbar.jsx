@@ -6,7 +6,7 @@ import { AuthContext } from "../../context/auth_context";
 import "./appbar.css";
 
 const Appbar = () => {
-  const { isLogged, logout, setAccessToken, setRefreshToken } =
+  const { isLogger, logout, setAccessToken, setRefreshToken } =
     useContext(AuthContext);
 
   const links = [{ to: "/", text: "HOME" }];
@@ -29,17 +29,17 @@ const Appbar = () => {
     <div className="appbar">
       <div className="left">
         {links.map((link) => (
-          <Link key={link.to} className="link">
-            {link.text}
+          <Link key={link.to} to={link.to} className="link">
+            <button className="link">{link.text}</button>
           </Link>
         ))}
       </div>
       <div className="right">
-        {isLogged ? (
+        {isLogger ? (
           <>
             {linksLogin.map((link) => (
-              <Link key={link.to} className="link">
-                {link.text}
+              <Link key={link.to} to={link.to} className="link">
+                <button className="link">{link.text}</button>
               </Link>
             ))}
             <button className="link" onClick={handleLogout}>
@@ -48,8 +48,8 @@ const Appbar = () => {
           </>
         ) : (
           linksLogout.map((link) => (
-            <Link key={link.to} className="link">
-              {link.text}
+            <Link key={link.to} to={link.to} className="link">
+              <button className="link">{link.text}</button>
             </Link>
           ))
         )}

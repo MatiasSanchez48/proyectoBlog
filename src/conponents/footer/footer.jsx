@@ -6,11 +6,11 @@ const Footer = () => {
 
   return (
     <>
-      {isLogger ? null : (
+      {isLogger ? (
         <footer>
           <h1>Footer</h1>
         </footer>
-      )}
+      ) : null}
     </>
   );
 };
