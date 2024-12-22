@@ -1,6 +1,8 @@
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CircularProgress from "@mui/material/CircularProgress";
+import "./register.css";
 
 const Register = () => {
   const [usuario, setUsuario] = useState("");
@@ -8,9 +10,11 @@ const Register = () => {
   const [fecha, setFecha] = useState("");
   const [password, setPassword] = useState("");
   const [password2, setPassword2] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleRegisterBack = async (data) => {
+    setIsLoading(true);
     const response = await fetch(import.meta.env.VITE_URL + "auth/register", {
       method: "POST",
       headers: {
@@ -18,13 +22,13 @@ const Register = () => {
       },
       body: JSON.stringify(data),
     });
-    const responseJson = await response.json();
-    console.log(responseJson.data);
+
     if (response.ok) {
       toast.success("Registro exitoso");
       //navegar al login
       navigate("/login");
     }
+    setIsLoading(false);
   };
 
   const handleRegister = async (e) => {
@@ -38,6 +42,7 @@ const Register = () => {
         password2 === ""
       ) {
         toast.error("Todos los campos son obligatorios");
+        return;
       }
       if (password !== password2) {
         toast.error("Las contraseñas no coinciden");
@@ -49,34 +54,36 @@ const Register = () => {
         fechaNacimiento: fecha,
         password: password,
       };
-      console.log(data);
       await handleRegisterBack(data);
     } catch (error) {
       console.log(error);
+      setIsLoading(false);
       toast.error("Error en el registro");
     }
   };
   return (
     <div className="contenedor">
       <form onSubmit={handleRegister} className="form">
-        <h1>Crear Blog</h1>
+        <h1>Registrarse</h1>
         <div className="input">
           <label htmlFor="usuario" className="label">
-            Usuario
+            Nombre de usuario
           </label>
           <input
             type="text"
             id="usuario"
+            placeholder="Nombre de usuario"
             onChange={(e) => setUsuario(e.target.value)}
           />
         </div>
         <div className="input">
           <label htmlFor="email" className="label">
-            email
+            Email
           </label>
           <input
             type="email"
             id="email"
+            placeholder="Email"
             onChange={(e) => setEmail(e.target.value)}
           />
         </div>
@@ -87,34 +94,45 @@ const Register = () => {
           <input
             type="date"
             id="fecha"
+            placeholder="ej: 1999-12-31"
             onChange={(e) => setFecha(e.target.value)}
           />
         </div>
         <div className="input">
           <label htmlFor="pass" className="label">
-            Usuario
+            Contraseña
           </label>
           <input
             type="password"
             id="pass"
+            placeholder="Contraseña"
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
         <div className="input">
           <label htmlFor="pass2" className="label">
-            Usuario
+            Repetir contraseña
           </label>
           <input
             type="password"
             id="pass2"
+            placeholder="Repetir contraseña"
             onChange={(e) => setPassword2(e.target.value)}
           />
         </div>
-        <button type="submit" className="boton">
-          Registrar
+        <button
+          className="button"
+          style={{ width: "300px", height: "60px" }}
+          type="submit"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <CircularProgress size={24} className="loader" color="inherit" />
+          ) : (
+            "Registrarse"
+          )}
         </button>
       </form>
-      <h1>Register</h1>
     </div>
   );
 };

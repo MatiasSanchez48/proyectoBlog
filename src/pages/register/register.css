@@ -1,0 +1,38 @@
+.contenedor {
+  justify-content: center;
+}
+
+.form {
+  background-color: #212121;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+}
+
+.label {
+  color: #fff;
+  font-weight: 600;
+}
+.button {
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 25px;
+}
+.button:hover {
+  outline: none;
+  border-color: #ffbb00;
+  color: #ffbb00;
+}
+.button:active {
+  outline: none;
+  border-color: #ffbb00;
+  transform: scale(0.95);
+  color: #ffbb00;
+}
+.button:focus {
+  outline: none;
+  border-color: #ffbb00;
+  color: #ffbb00;
+}

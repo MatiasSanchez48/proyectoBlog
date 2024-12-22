@@ -61,21 +61,29 @@ const Login = () => {
   useEffect(() => {});
 
   return (
-    <div>
+    <div className="contenedor">
       <h1 className="title">LOGIN</h1>
       <form onSubmit={handleLogin} className="form">
+        <label htmlFor="Nombre de usuario o Email" className="label">
+          Nombre de usuario o Email{" "}
+        </label>
         <div className="input">
           <input
             type="text"
             value={username}
+            id="Nombre de usuario o Email"
             onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username or Email"
+            placeholder="Nombre de usuario o Email"
             required
           />
-        </div>
+        </div>{" "}
+        <label htmlFor="password" className="label">
+          Password{" "}
+        </label>
         <div className="input">
           <input
             type="password"
+            id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
@@ -92,10 +100,11 @@ const Login = () => {
           {isLoading ? (
             <CircularProgress size={24} className="loader" color="inherit" />
           ) : (
-            "Log In"
+            "Logearse"
           )}
         </button>
       </form>
+      
     </div>
   );
 };

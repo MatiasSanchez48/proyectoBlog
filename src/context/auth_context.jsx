@@ -64,8 +64,6 @@ const AuthProvider = ({ children }) => {
     setIsLogger(true);
     localStorage.setItem("isLogged", true);
     localStorage.setItem("userId", id);
-    console.log(localStorage.getItem("userId"));
-    console.log(localStorage.getItem("isLogged"));
   };
   const logout = () => {
     setIsLogger(false);

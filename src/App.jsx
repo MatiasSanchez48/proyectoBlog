@@ -9,6 +9,8 @@ import Productos from "./pages/productos/productos";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/auth_context";
 import CrearBlog from "./pages/crear-blog/CrearBlog";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 //! PARA usar als variables de entorno.
 import.meta.env.VITE_API_KEY;
 
@@ -23,8 +25,13 @@ function App() {
 }
 
 function AppContent() {
+  const notify = () => toast.success("¡Este es un toast!");
   return (
     <div className="app-container">
+      <div>
+        <button onClick={notify}>Mostrar Toast</button>
+        <ToastContainer />
+      </div>
       <Appbar />
       <main>
         <Routes>

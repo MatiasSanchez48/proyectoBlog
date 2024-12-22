@@ -1,7 +1,22 @@
+.contenedor {
+  justify-content: center;
+
+  flex-direction: column;
+}
+
+.form {
+  background-color: #212121;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 400px;
+  box-sizing: border-box;
+  padding: 30;
+}
 .title {
   font-size: 80px;
   margin-top: 50px;
-  margin-bottom: 80px;
+  margin-bottom: 50px;
   font-weight: bold;
   letter-spacing: 4px;
   text-align: center;
@@ -37,6 +52,7 @@
   font-size: 24px;
   font-weight: bold;
   margin-top: 100px;
+  margin-bottom: 50px;
 }
 .button:hover {
   outline: none;
@@ -55,3 +71,9 @@
   color: #ffbb00;
 }
 
+.label {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 10px;
+  text-align: start;
+}
