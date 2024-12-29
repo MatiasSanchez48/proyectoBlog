@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 import "./blog.css";
 import Autor from "./autor";
-const Blog = ({ blog }) => {
+const Blog = ({ blog, child = null }) => {
   return (
     <div className="contenedor">
       <div className="datos">
@@ -23,12 +23,30 @@ const Blog = ({ blog }) => {
         <div className="autor-vermas">
           <div>
             <p className="titulo-descripcion">Creador:</p>{" "}
-            <div className="autor">{<Autor autor={blog.autor}/> || "Autor desconocido"}</div>
+            <div className="autor">
+              {<Autor autor={blog.autor} /> || "Autor desconocido"}
+            </div>
           </div>
-          <Link className="vermas" to={`/blog/${blog.id}`}>Ver más</Link>
+          <div>
+            <Link className="back-link" to={`/blog/${blog.id}`}>
+              ver más
+            </Link>
+            {child && child}
+          </div>
         </div>
       </div>
-      <img src={blog.imagen} alt={null} className="imagen" />
+      <div className="imagen">
+        <img
+          src={blog.imagen}
+          alt="Imagen del blog"
+          onError={(e) => {
+            e.target.onerror = null;
+            e.target.src =
+              "https://static.vecteezy.com/system/resources/previews/004/141/669/large_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg";
+          }}
+          className="imagen"
+        />
+      </div>
     </div>
   );
 };

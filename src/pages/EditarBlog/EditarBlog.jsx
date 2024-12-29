@@ -1,15 +1,18 @@
 import { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-
 import { AuthContext } from "../../context/auth_context";
-const CrearBlog = () => {
+import { FaEdit } from "react-icons/fa";
+
+const EditarBlog = () => {
+  const { state } = useLocation();
+  const { blog } = state || {};
   const navigate = useNavigate();
   const backURL = import.meta.env.VITE_URL;
-  const [titulo, setTitulo] = useState("");
-  const [descripcion, setDescripcion] = useState("");
-  const [imagen, setImagen] = useState("");
-  const [contenido, setContenido] = useState("");
+  const [titulo, setTitulo] = useState(blog?.titulo || "");
+  const [descripcion, setDescripcion] = useState(blog?.descripcion || "");
+  const [imagen, setImagen] = useState(blog?.imagen || "");
+  const [contenido, setContenido] = useState(blog?.contenido || "");
   const { accessToken, handleRefreshToken, userId } = useContext(AuthContext);
 
   const handleSubmit = async (e) => {
@@ -25,7 +28,7 @@ const CrearBlog = () => {
         return;
       }
 
-      const blog = {
+      const blogModificado = {
         titulo,
         imagen,
         contenido,
@@ -33,57 +36,60 @@ const CrearBlog = () => {
         autor: userId,
       };
 
-      let response = await fetchBack(blog);
+      let response = await fetchBack(blogModificado);
 
       if (response === -1) {
-        await fetchBack(blog);
+        await fetchBack(blogModificado);
       }
 
       if (response) {
-        toast.success("Blog creado exitosamente");
+        toast.success("Blog Modificado exitosamente :D");
         setContenido("");
         setDescripcion("");
         setImagen("");
         setTitulo("");
+        navigate("/");
       }
     } catch (error) {
-      console.error("Error al crear el blog:", error.message);
-      toast.error("Error al crear el blog");
+      console.error("Error al Editar el blog:", error.message);
+      toast.error("Error al Edidar el blog");
     }
   };
   const fetchBack = async (data) => {
     try {
-
-      const response = await fetch(backURL + "blog/", {
-        method: "POST",
+      const response = await fetch(backURL + "blog/" + blog.id, {
+        method: "PUT",
         headers: {
           "Content-Type": "application/json",
           Authorization: accessToken,
         },
         body: JSON.stringify(data),
       });
+      if (response.status === 500) {
+        toast.error("No se pudo editar el blog");
+        return null;
+      }
       if (response.status === 401) {
         const respuesta = await handleRefreshToken();
+
         if (respuesta === -1) {
           navigate("/login");
         }
         return -1;
       }
-      const responseJson = await response.json();
-
       if (response.ok) {
-        return responseJson.data;
+        return response.ok;
       }
       return null;
     } catch (error) {
-      toast.error("Error al crear el blog");
-      console.error("Error al crear el blog:", error);
+      toast.error("Error al Editar el blog");
+      console.error("Error al Editar el blog:", error);
     }
   };
 
   return (
     <div className="contenedor">
-      <h1>Crear Blog</h1>
+      <h1>Modificar Blog</h1>
       <form onSubmit={handleSubmit} className="form">
         <label htmlFor="Titulo" className="label">
           Titulo{" "}
@@ -140,11 +146,11 @@ const CrearBlog = () => {
           />
         </div>
         <button type="submit" className="button">
-          Crear Blog
+          Modificar Blog <FaEdit />
         </button>
       </form>
     </div>
   );
 };
 
-export default CrearBlog;
+export default EditarBlog;

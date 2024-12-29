@@ -1,0 +1,17 @@
+.paginacion {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  justify-items: row;
+}
+
+.paginacion-titulo {
+  font-size: 28px;
+  margin-bottom: 50px;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding-left: 25px;
+  padding-right: 25px;
+}

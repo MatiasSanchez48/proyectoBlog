@@ -3,13 +3,13 @@
   justify-content: space-between;
   background-color: #212121;
   align-items: center;
+  flex-direction: row;
   padding-left: 100px;
   padding-right: 100px;
   padding-top: 30px;
   padding-bottom: 30px;
   margin: 20px;
   border-radius: 20px;
-
   border: 1.5px solid #ffbb0067;
 }
 .datos {
@@ -26,6 +26,11 @@
   margin-bottom: 5px;
   font-weight: bold;
   text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  max-width: 25ch;
 }
 .divider {
   border: none;

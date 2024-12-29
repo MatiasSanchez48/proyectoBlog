@@ -15,6 +15,11 @@
   margin-bottom: 20px;
   text-align: center;
   text-transform: capitalize;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 100%;
+  max-width: 85ch;
 }
 
 .blog-image {
@@ -94,6 +99,7 @@
 .back-link {
   display: inline-block;
   margin-top: 20px;
+  margin-left: 10px;
   padding: 10px 20px;
   background: #ffbb0067;
   color: white;
@@ -113,4 +119,11 @@
   border-top: 1.5px solid #ffbb0067;
   width: 100%;
   margin: 5px 5px;
+}
+
+.actions {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 20px;
 }

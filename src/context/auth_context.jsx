@@ -34,21 +34,26 @@ const AuthProvider = ({ children }) => {
   }, [refreshToken]);
 
   const handleRefreshToken = async () => {
-    const backURL = import.meta.env.VITE_URL;
-    const response = await fetch(backURL + "auth/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "x-refresh-token": refreshToken,
-      },
-    });
-    const responseJson = await response.json();
-    if (response.ok) {
-      setAccessToken(responseJson.data.accessToken);
-    } else {
-      logout();
+    try {
+      const backURL = import.meta.env.VITE_URL;
+      const response = await fetch(backURL + "auth/token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "x-refresh-token": refreshToken,
+        },
+      });
+
+      const responseJson = await response.json();
+
+      if (response.ok) {
+        setAccessToken(responseJson.data.accessToken);
+      }
+    } catch (error) {
       setAccessToken(null);
       setRefreshToken(null);
+      console.error("Error al refrescar el token:", error.message);
+      logout();
       return -1;
     }
   };

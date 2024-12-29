@@ -2,6 +2,8 @@ import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../context/auth_context";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
+
 import CircularProgress from "@mui/material/CircularProgress";
 import "./login.css";
 
@@ -10,7 +12,10 @@ const Login = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
   const navigate = useNavigate();
+
   const handleLoginBack = async (data) => {
     const backURL = import.meta.env.VITE_URL;
     const response = await fetch(backURL + "auth/login", {
@@ -61,7 +66,7 @@ const Login = () => {
   useEffect(() => {});
 
   return (
-    <div className="contenedor">
+    <div className="contenedor-login">
       <h1 className="title">LOGIN</h1>
       <form onSubmit={handleLogin} className="form">
         <label htmlFor="Nombre de usuario o Email" className="label">
@@ -80,15 +85,27 @@ const Login = () => {
         <label htmlFor="password" className="label">
           Password{" "}
         </label>
-        <div className="input">
+        <div className="input" style={{ position: "relative" }}>
           <input
-            type="password"
+            type={passwordVisible ? "text" : "password"} 
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Password"
             required
           />
+          <span
+            onClick={() => setPasswordVisible(!passwordVisible)} 
+            style={{
+              position: "absolute",
+              right: "60px",
+              top: "55%",
+              transform: "translateY(-50%)",
+              cursor: "pointer",
+            }}
+          >
+            {passwordVisible ? <FaEyeSlash /> : <FaEye />}
+          </span>
         </div>
         <button
           className="button"
@@ -104,7 +121,6 @@ const Login = () => {
           )}
         </button>
       </form>
-      
     </div>
   );
 };

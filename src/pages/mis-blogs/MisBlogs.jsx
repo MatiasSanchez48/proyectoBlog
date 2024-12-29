@@ -1,18 +1,20 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../context/auth_context";
 
 import CircularProgress from "@mui/material/CircularProgress";
-import Blog from "./blog.jsx";
-import "./home.css";
+import Blog from "../home/blog.jsx";
+import BotonEliminar from "./BotonEliminar.jsx";
 
-const Home = () => {
+const MisBlogs = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const page = searchParams.get("page") || 1;
   const limit = searchParams.get("limit") || 2;
 
+  const { userId } = useContext(AuthContext);
   const [paginas, setPaginas] = useState(1);
   const [blogs, setBlogs] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,8 +23,13 @@ const Home = () => {
     try {
       setIsLoading(true);
       const backURL =
-        import.meta.env.VITE_URL + "blog?page=" + page + "&limit=" + limit;
-      console.log(backURL);
+        import.meta.env.VITE_URL +
+        "blog/getbyautor/" +
+        userId +
+        "?page=" +
+        page +
+        "&limit=" +
+        limit;
 
       const response = await fetch(backURL);
 
@@ -49,15 +56,19 @@ const Home = () => {
 
   useEffect(() => {
     fetchBlogs();
-  }, [page, limit]);
+  }, [page, limit, searchParams]);
 
   return (
     <>
-      <h1>Home</h1>
+      <h1>Mis Blogs</h1>
       {isLoading && <CircularProgress style={{ color: "#ffbb0067" }} />}
       {blogs.length === 0 && !isLoading && <h3>No hay blogs...</h3>}
       {blogs.map((blog) => (
-        <Blog key={blog.id} blog={blog} />
+        <Blog
+          key={blog.id}
+          blog={blog}
+          child={<BotonEliminar id={blog.id} onDelete={fetchBlogs} />}
+        />
       ))}
       <div className="paginacion">
         <button
@@ -80,4 +91,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default MisBlogs;
