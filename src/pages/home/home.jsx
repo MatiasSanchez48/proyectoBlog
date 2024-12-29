@@ -4,7 +4,7 @@ import { useSearchParams, useNavigate } from "react-router-dom";
 
 import CircularProgress from "@mui/material/CircularProgress";
 import Blog from "./blog.jsx";
-import "./home.css";
+import "./Home.css";
 
 const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
