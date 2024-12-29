@@ -52,7 +52,6 @@ const AuthProvider = ({ children }) => {
     } catch (error) {
       setAccessToken(null);
       setRefreshToken(null);
-      console.error("Error al refrescar el token:", error.message);
       logout();
       return -1;
     }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../context/auth_context";
@@ -32,8 +33,7 @@ const Perfil = () => {
       const resultadoJson = await response.json();
       setAutorData(resultadoJson.data.autor);
       setIsLoading(false);
-    } catch (error) {
-      console.error("Error al obtener los productos:", error);
+    } catch (e) {
       setIsLoading(false);
     }
   };
@@ -44,12 +44,9 @@ const Perfil = () => {
         logout();
         navigate("/login");
       }
-      console.log(respuesta);
 
       return -1;
-    } catch (error) {
-      console.error(error);
-
+    } catch (e) {
       return -1;
     }
   };
@@ -78,8 +75,8 @@ const Perfil = () => {
       } else {
         toast.error("Error al actualizar el perfil");
       }
-    } catch (error) {
-      console.error("Error al actualizar el perfil:", error);
+    } catch (e) {
+      toast.error("Error al actualizar el perfil");
     }
   };
   const handleChange = (event) => {

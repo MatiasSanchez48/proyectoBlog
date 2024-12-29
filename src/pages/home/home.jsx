@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
@@ -22,7 +23,7 @@ const Home = () => {
       setIsLoading(true);
       const backURL =
         import.meta.env.VITE_URL + "blog?page=" + page + "&limit=" + limit;
-      console.log(backURL);
+     
 
       const response = await fetch(backURL);
 
@@ -36,8 +37,7 @@ const Home = () => {
       setPaginas(responseJson.data.respuesta.cantidadActual);
 
       setIsLoading(false);
-    } catch (error) {
-      console.error("Fetch error: ", error);
+    } catch (e) {
       setIsLoading(false);
     }
   };

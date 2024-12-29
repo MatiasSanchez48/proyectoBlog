@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { toast } from "react-toastify";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -59,8 +60,7 @@ const Register = () => {
         password: password,
       };
       await handleRegisterBack(data);
-    } catch (error) {
-      console.log(error);
+    } catch (e) {
       setIsLoading(false);
       toast.error("Error en el registro");
     }

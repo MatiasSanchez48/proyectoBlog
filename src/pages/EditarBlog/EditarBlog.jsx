@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -50,8 +51,7 @@ const EditarBlog = () => {
         setTitulo("");
         navigate("/");
       }
-    } catch (error) {
-      console.error("Error al Editar el blog:", error.message);
+    } catch (e) {
       toast.error("Error al Edidar el blog");
     }
   };
@@ -81,9 +81,8 @@ const EditarBlog = () => {
         return response.ok;
       }
       return null;
-    } catch (error) {
+    } catch (e) {
       toast.error("Error al Editar el blog");
-      console.error("Error al Editar el blog:", error);
     }
   };
 

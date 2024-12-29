@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState, useContext } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
@@ -43,8 +44,7 @@ const MisBlogs = () => {
       setPaginas(responseJson.data.respuesta.cantidadActual);
 
       setIsLoading(false);
-    } catch (error) {
-      console.error("Fetch error: ", error);
+    } catch (e) {
       setIsLoading(false);
     }
   };

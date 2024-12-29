@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -47,7 +48,6 @@ const CrearBlog = () => {
         setTitulo("");
       }
     } catch (error) {
-      console.error("Error al crear el blog:", error.message);
       toast.error("Error al crear el blog");
     }
   };
@@ -75,9 +75,8 @@ const CrearBlog = () => {
         return responseJson.data;
       }
       return null;
-    } catch (error) {
+    } catch (e) {
       toast.error("Error al crear el blog");
-      console.error("Error al crear el blog:", error);
     }
   };
 

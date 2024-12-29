@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 // import { Link } from "react-router-dom";
@@ -33,8 +34,7 @@ const Autor = ({ autor = null, conNombre = true }) => {
       const resultadoJson = await response.json();
       setAutorData(resultadoJson.data.autor);
       setIsLoading(false);
-    } catch (error) {
-      console.error("Error al obtener los productos:", error);
+    } catch (e) {
       setIsLoading(false);
     }
   };
@@ -44,12 +44,9 @@ const Autor = ({ autor = null, conNombre = true }) => {
       if (respuesta === -1) {
         navigate("/login");
       }
-      console.log(respuesta);
 
       return -1;
-    } catch (error) {
-      console.error(error);
-
+    } catch (e) {
       return -1;
     }
   };

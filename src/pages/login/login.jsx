@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../../context/auth_context";
 import { useNavigate } from "react-router-dom";
@@ -36,7 +37,6 @@ const Login = () => {
         toast.error("Todos los campos son obligatorios");
       }
       setIsLoading(true);
-      // Realizar la solicitud de inicio de sesión aquí
       const data = {
         username,
         password,
@@ -53,13 +53,11 @@ const Login = () => {
         setRefreshToken(responseJson.data.refreshToken);
         login(responseJson.data.usuario.id);
         toast.success("Login exitoso");
-        //navegar al login
         setIsLoading(false);
         navigate("/");
       }
-    } catch (error) {
+    } catch (e) {
       setIsLoading(false);
-      console.log(error);
       toast.error("Error al intentar iniciar sesión");
     }
   };
@@ -87,7 +85,7 @@ const Login = () => {
         </label>
         <div className="input" style={{ position: "relative" }}>
           <input
-            type={passwordVisible ? "text" : "password"} 
+            type={passwordVisible ? "text" : "password"}
             id="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
@@ -95,7 +93,7 @@ const Login = () => {
             required
           />
           <span
-            onClick={() => setPasswordVisible(!passwordVisible)} 
+            onClick={() => setPasswordVisible(!passwordVisible)}
             style={{
               position: "absolute",
               right: "60px",

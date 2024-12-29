@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
 import "./productos.css";
 
@@ -8,15 +9,13 @@ const Productos = () => {
   const fetchProductos = async () => {
     try {
       setIsLoading(true);
-      const backURL =
-        import.meta.env.VITE_URL + "productos";
+      const backURL = import.meta.env.VITE_URL + "productos";
       const response = await fetch(backURL);
       const resultadoJson = await response.json();
       setProductos(resultadoJson.data.productos);
 
       setIsLoading(false);
-    } catch (error) {
-      console.error("Error al obtener los productos:", error);
+    } catch (e) {
       setIsLoading(false);
     }
   };

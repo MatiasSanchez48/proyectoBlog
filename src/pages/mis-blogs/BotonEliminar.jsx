@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import { useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -33,10 +34,9 @@ const BotonEliminar = ({ id, onDelete }) => {
       toast.success("Blog eliminado correctamente");
       setIsLoading(false);
       onDelete();
-    } catch (error) {
+    } catch (e) {
       setIsLoading(false);
       toast.error("el blog no se pudo eliminar");
-      console.error("Fetch error: ", error);
     }
   };
   if (isLoading) {
