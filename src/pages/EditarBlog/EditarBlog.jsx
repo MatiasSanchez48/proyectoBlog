@@ -14,7 +14,8 @@ const EditarBlog = () => {
   const [descripcion, setDescripcion] = useState(blog?.descripcion || "");
   const [imagen, setImagen] = useState(blog?.imagen || "");
   const [contenido, setContenido] = useState(blog?.contenido || "");
-  const { accessToken, handleRefreshToken, userId } = useContext(AuthContext);
+  const { accessToken, handleRefreshToken, userId, logout } =
+    useContext(AuthContext);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -43,7 +44,7 @@ const EditarBlog = () => {
         await fetchBack(blogModificado);
       }
 
-      if (response) {
+      if (response !== null && response !== -1) {
         toast.success("Blog Modificado exitosamente :D");
         setContenido("");
         setDescripcion("");
@@ -69,11 +70,16 @@ const EditarBlog = () => {
         toast.error("No se pudo editar el blog");
         return null;
       }
+
       if (response.status === 401) {
         const respuesta = await handleRefreshToken();
+    
 
-        if (respuesta === -1) {
+        if (respuesta == -1 || respuesta == null) {
+          toast.success("No se pudo Modificar el blog");
+          logout();
           navigate("/login");
+          return -1;
         }
         return -1;
       }
