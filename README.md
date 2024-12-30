@@ -3,12 +3,9 @@
 Esta aplicación permite a los usuarios interactuar con blogs, iniciar sesión, crear cuentas, y gestionar productos. A continuación, se describen todas las páginas y componentes incluidos en el proyecto.
 
 ---
-# Clave de la API para interactuar con servicios externos
+## Archivo .env(prod)
 
 VITE_API_KEY=""
-
-# URL base del backend
-
 VITE_URL="https://apiblog-gon5.onrender.com/"
 
 ---
