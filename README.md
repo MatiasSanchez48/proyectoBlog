@@ -6,6 +6,7 @@ Esta aplicación permite a los usuarios interactuar con blogs, iniciar sesión, 
 ## Archivo .env(prod)
 
 VITE_API_KEY=""
+
 VITE_URL="https://apiblog-gon5.onrender.com/"
 
 ---
